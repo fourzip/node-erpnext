@@ -1,0 +1,25 @@
+{
+  "name": "node-erpnext",
+  "version": "1.0.0",
+  "description": "This library let you call REST API of erpnext.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawangspandey/node_erpnext.git"
+  },
+  "keywords": [],
+  "author": "pawan <pawang.s.pandey@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pawangspandey/node_erpnext/issues"
+  },
+  "homepage": "https://github.com/pawangspandey/node_erpnext#readme",
+  "dependencies": {
+    "bluebird": "3.5.0",
+    "request": "2.81.0",
+    "request-promise": "4.2.0"
+  }
+}
