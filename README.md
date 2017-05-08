@@ -1,4 +1,4 @@
-# node_erpnext
+# node-erpnext
 This library let you call REST API of erpnext.
 
 ```js
