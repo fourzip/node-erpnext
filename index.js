@@ -143,5 +143,119 @@ ERPNext.prototype.updateCustomerByName = function(name, object){
     })
 }
 
+
+
+
+/**
+ * Create Customer Group.
+ * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * @param {Object} object customer group data.
+ * @return {Promise} resolve with customer group data. 
+ */
+
+ERPNext.prototype.createCustomerGroup = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Customer Group",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (customer) {
+            customer = JSON.parse(customer);
+            return customer.data;
+        })
+    })
+}
+
+
+/**
+ * Update Customer Group by name.
+ * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * @param {String} name customer group name.
+ * @param {Object} object customer group data.
+ * @return {Promise} resolve with customer group data. 
+ */
+
+ERPNext.prototype.updateCustomerGroupByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Customer Group/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (customerGroup) {
+            customerGroup = JSON.parse(customerGroup);
+            return customerGroup.data;
+        })
+    })
+}
+
+
+/**
+ * Get Customer Group's name.
+ * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * @param {Object} object customer group data.
+ * @return {Promise} resolve with customer group data. 
+ */
+
+ERPNext.prototype.getCustomerGroupsName = function(){
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Customer Group",
+            jar: _this.cookieJar,
+        }).then(function (customer) {
+            customer = JSON.parse(customer);
+            return customer.data;
+        })
+    })
+}
+
+/**
+ * Get Customer Group's info by name.
+ * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * @param {String} name customer group's name.
+ * @return {Promise} resolve with customer group data.
+ */
+
+ERPNext.prototype.getCustomerGroupByName = function(name){
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Customer Group/"+ name,
+            jar: _this.cookieJar,
+        }).then(function (customer) {
+            customer = JSON.parse(customer);
+            return customer.data;
+        })
+    })
+}
+
+/**
+ *  Get Customer Group's info array.
+ *  @return {Promise} resolve customer group data array.
+ */
+
+ERPNext.prototype.getCustomerGroups = function(){
+    var _this = this;
+    return _this.getCustomerGroupsName().then(function (customersGroups) {
+        return Promise.map(customersGroups, function (group) {
+            return _this.getCustomerGroupByName(group.name);
+        });
+    })
+}
+
 module.exports = ERPNext;
 

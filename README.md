@@ -74,3 +74,33 @@ update customer by name. for parameters follow [this](https://frappe.github.io/e
   })
 
 ```
+
+## Customer Group
+
+Create a new customer group.
+For parameters follow [this](https://frappe.github.io/erpnext/current/models/setup/customer_group).
+
+```js
+
+  erpnext.createCustomerGroup({
+     'customer_group_name' : 'new Group',
+    'parent_customer_group': 'All Customer Groups',
+    'is_group': 'No'
+  })
+
+```
+
+update an existing customer group by group name.
+For parameters follow [this](https://frappe.github.io/erpnext/current/models/setup/customer_group).
+
+```js
+
+  erpnext.updateCustomerGroupByName('new Group',{
+    'customer_group_name' : 'new group',
+    'parent_customer_group': 'All Customer Groups',
+    'is_group': 'No'
+  })
+
+```
+
+
