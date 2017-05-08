@@ -1,6 +1,6 @@
 {
   "name": "node-erpnext",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This library let you call REST API of erpnext.",
   "main": "index.js",
   "scripts": {
