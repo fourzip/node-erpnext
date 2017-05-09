@@ -257,5 +257,116 @@ ERPNext.prototype.getCustomerGroups = function(){
     })
 }
 
+
+/**
+ *  Get Sales Order's name array.
+ *  @return {Promise} resolve customer group data array.
+ */
+
+ERPNext.prototype.getSalesOrdersName = function () {
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Sales Order",
+            jar: _this.cookieJar,
+        }).then(function (salesOrder) {
+            salesOrder = JSON.parse(salesOrder);
+            return salesOrder.data;
+        })
+    })
+}
+
+
+/**
+ *  Get Sales Order's name array.
+ *  @param {String} name name of the sales order
+ *  @return {Promise} resolve customer group data array.
+ */
+
+ERPNext.prototype.getSalesOrderByName = function (name) {
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Sales Order/"+name,
+            jar: _this.cookieJar,
+        }).then(function (salesOrder) {
+            salesOrder = JSON.parse(salesOrder);
+            return salesOrder.data;
+        })
+    })
+}
+
+
+/**
+ * Get Sales Order info array.
+ * @return {Promise} resolve Sales Orders array list.
+ */
+
+ERPNext.prototype.getSalesOrder = function(){
+    var _this = this;
+    return _this.getSalesOrdersName().then(function (salesOrders) {
+        return Promise.map(salesOrders, function (saleOrder) {
+            return _this.getSalesOrderByName(saleOrder.name);
+        });
+    })
+}
+
+
+/**
+ * Create Sales Order.
+ * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * @param {Object} object Sales Order.
+ * @return {Promise} resolve Created Sales Order.
+ */
+
+ERPNext.prototype.createSalesOrder = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Sales Order",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (salesOrder) {
+            salesOrder = JSON.parse(salesOrder);
+            return salesOrder.data;
+        })
+    })
+}
+
+
+/**
+ * Update Sales Order by name.
+ * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * @param {String} name name of the sales order.
+ * @param {Object} object data of sales order.
+ * @return {Promise} resolve Created Sales Order.
+ */
+
+ERPNext.prototype.updateSalesOrderByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Sales Order/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (salesOrder) {
+            salesOrder = JSON.parse(salesOrder);
+            return salesOrder.data;
+        })
+    })
+}
+
 module.exports = ERPNext;
 
