@@ -103,4 +103,103 @@ For parameters follow [this](https://frappe.github.io/erpnext/current/models/set
 
 ```
 
+Get list of customer groups.
+
+```js 
+
+erpnext.getCustomerGroups().then(function(customerGroups){
+    console.log(customerGroups);
+})
+
+```
+Get customer group's name list.
+
+```js
+
+erpnext.getCustomerGroupsName().then(function(customerGroups){
+    console.log(customerGroups);
+})
+
+```
+Get customer group's info by group name
+
+```js
+
+ erpnext.getCustomerGroupByName('new Group').then(function(customerGroups){
+     console.log(customerGroups);
+ })
+
+```
+
+ ## Sales Order
+
+
+Create a Sales Order.
+For parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/sales_order).
+
+```js
+
+  erpnext.createSalesOrder({
+    "status": "Draft",
+    "naming_series": "SO-",
+    "currency": "INR",
+    "billing_status": "Not Billed",
+    "order_type": "Sales",
+    "transaction_date": "2017-05-10",
+    "territory": "India",
+    "delivery_status": "Not Delivered",
+    "customer": "Camelport Internal",
+    "items": [
+      {
+        "qty": 5,
+        "rate": 2000,
+        "stock_uom": "Nos",
+        "item_code": "i01",
+        "parentfield": "items"
+      }
+    ],
+    "delivery_date": "2017-05-18",
+    "sales_team": []
+  })
+
+```
+
+update an existing sales order by sales order name.
+For parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/sales_order).
+```js
+
+  erpnext.updateSalesOrderByName('SO-00003',{
+    "status": "Submitted",
+    "docstatus" : 1
+  })
+
+```
+
+Get list of sales order.
+
+```js 
+
+erpnext.getSalesOrder().then(function(salesOrder){
+    console.log(salesOrder);
+})
+
+```
+Get sales order's name list.
+
+```js
+
+erpnext.getSalesOrdersName().then(function(salesOrder){
+    console.log(salesOrder);
+})
+
+```
+Get sales order's info by order name
+
+```js
+
+ erpnext.getSalesOrderByName('new Group').then(function(customer){
+     console.log(customer);
+ })
+
+
 
