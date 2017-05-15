@@ -368,5 +368,283 @@ ERPNext.prototype.updateSalesOrderByName = function(name, object){
     })
 }
 
+/**
+ * Create an Item.
+ * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice_item.
+ * @param {Object} object item object.
+ * @return {Promise} resolve Created item.
+ */
+
+ERPNext.prototype.createAnItem = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Item",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (item) {
+            item = JSON.parse(item);
+            return item.data;
+        })
+    })
+}
+
+/**
+ * Update an Item.
+ * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * @param {String} name name of the item.
+ * @param {Object} object data of item.
+ * @return {Promise} resolve updated item
+ */
+
+ERPNext.prototype.updateItemByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Item/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (item) {
+            item = JSON.parse(item);
+            return item.data;
+        })
+    })
+}
+
+
+/**
+ * Create a Supplier.
+ * For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+ * @param {Object} object Supplier object.
+ * @return {Promise} resolve Created Supplier.
+ */
+
+ERPNext.prototype.createSupplier = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Supplier",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (Supplier) {
+            Supplier = JSON.parse(Supplier);
+            return Supplier.data;
+        })
+    })
+}
+
+/**
+ * Update Supplier.
+ * For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+ * @param {String} name name of the Supplier.
+ * @param {Object} object data of Supplier.
+ * @return {Promise} resolve updated Supplier
+ */
+
+ERPNext.prototype.updateSupplierByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Supplier/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (Supplier) {
+            Supplier = JSON.parse(Supplier);
+            return Supplier.data;
+        })
+    })
+}
+
+/**
+ * Create a Purchase Invoice.
+ * For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+ * @param {Object} object Purchase Invoice  object.
+ * @return {Promise} resolve Created Purchase Invoice .
+ */
+
+ERPNext.prototype.createPurchaseInvoice = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Purchase Invoice",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (PurchaseInvoice ) {
+            PurchaseInvoice = JSON.parse(PurchaseInvoice);
+            return PurchaseInvoice.data;
+        })
+    })
+}
+
+/**
+ * Update Purchase Invoice.
+ * For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+ * @param {String} name name of the Purchase Invoice.
+ * @param {Object} object data of Purchase Invoice.
+ * @return {Promise} resolve updated Purchase Invoice.
+ */
+
+ERPNext.prototype.updatePurchaseInvoiceByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Purchase Invoice/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (PurchaseInvoice) {
+            PurchaseInvoice = JSON.parse(PurchaseInvoice);
+            return PurchaseInvoice.data;
+        })
+    })
+}
+
+/**
+ * Create a Sales Invoice.
+ * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+ * @param {Object} object Sales Invoice  object.
+ * @return {Promise} resolve Created Sales Invoice.
+ */
+
+ERPNext.prototype.createSalesInvoice = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Sales Invoice",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (SalesInvoice ) {
+            SalesInvoice = JSON.parse(SalesInvoice);
+            return SalesInvoice.data;
+        })
+    })
+}
+
+/**
+ * Update Sales Invoice.
+ * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+ * @param {String} name name of the Sales Invoice.
+ * @param {Object} object data of Sales Invoice.
+ * @return {Promise} resolve updated Sales Invoice.
+ */
+
+ERPNext.prototype.updateSalesInvoiceByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Sales Invoice/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (SalesInvoice) {
+            SalesInvoice = JSON.parse(SalesInvoice);
+            return SalesInvoice.data;
+        })
+    })
+}
+
+/**
+ * Create a Purchase Order.
+ * For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+ * @param {Object} object Purchase Order object.
+ * @return {Promise} resolve Created Purchase Order.
+ */
+
+ERPNext.prototype.createPurchaseOrder = function(object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/Purchase Order",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (SalesInvoice ) {
+            SalesInvoice = JSON.parse(SalesInvoice);
+            return SalesInvoice.data;
+        })
+    })
+}
+
+/**
+ * Update Purchase Order.
+ * For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+ * @param {String} name name of the Purchase Order.
+ * @param {Object} object data of Purchase Order.
+ * @return {Promise} resolve updated Purchase Order.
+ */
+
+ERPNext.prototype.updatePurchaseOrderByName = function(name, object){
+    var _this = this;
+    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.put({
+            url: _this.baseUrl + "/api/resource/Purchase Order/"+name,
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (PurchaseOrder) {
+            PurchaseOrder = JSON.parse(PurchaseOrder);
+            return PurchaseOrder.data;
+        })
+    })
+}
+
+
+
 module.exports = ERPNext;
 

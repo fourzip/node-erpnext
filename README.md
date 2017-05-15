@@ -201,5 +201,189 @@ Get sales order's info by order name
      console.log(customer);
  })
 
+```
 
+## Item
 
+Create an Item.
+For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice_item.
+
+```js
+
+  erpnext.createAnItem({
+    "has_variants": 0,
+    "is_stock_item": "No",
+    "valuation_method": "",
+    "min_order_qty": 0,
+    "is_asset_item": "No",
+    "has_batch_no": "No",
+    "has_serial_no": "No",
+    "is_purchase_item": "Yes",
+    "is_sales_item": "Yes",
+    "is_service_item": "No",
+    "inspection_required": "No",
+    "item_code": "item code",
+    "item_name": "item name",
+    "description": "description",
+    "item_group": "Services"
+  })
+
+```
+
+Update an Item.
+For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+
+```js
+
+erpnext.updateItemByName("item code",{
+    "has_variants": 0,
+    "is_stock_item": "No",
+    "valuation_method": "",
+    "min_order_qty": 0,
+    "is_asset_item": "No",
+    "has_batch_no": "No",
+    "has_serial_no": "No",
+    "is_purchase_item": "Yes",
+    "is_sales_item": "Yes",
+    "is_service_item": "No",
+    "inspection_required": "No",
+    "item_code": "item code",
+    "item_name": "item name",
+    "description": "description",
+    "item_group": "Services"
+})
+
+```
+
+## Supplier
+
+Create a Supplier.
+For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+
+```js
+
+erpnext.createSupplier({"supplier_type":"Services","supplier_name":"ram"});
+
+```
+Update Supplier.
+For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+
+```js
+
+  erpnext.updateSupplierByName("ram",{
+    "supplier_type":"Services",
+    "supplier_name":"ram"
+  })
+
+```
+
+## Purchase Invoice
+
+Create a Purchase Invoice
+For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice
+
+```js
+
+  erpnext.createPurchaseInvoice({
+      "supplier": "ram",
+
+      "items": [{
+              "item_code": "item code",
+              "qty": 4,
+              "price_list_rate": 5000,
+              "schedule_date": "2017-05-31"
+          }]
+  })
+
+```
+
+Update Purchase Invoice.
+For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+
+```js
+
+  erpnext.updatePurchaseInvoiceByName("name",{
+    "supplier": "ram"
+  })
+
+```
+
+## Sales Invoice
+
+Create a Sales Invoice.
+For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+
+```js
+
+  erpnext.createSalesInvoice(
+    {
+    "due_date": "2017-05-14",
+     "customer": "ram",
+    "items":[{
+        "item_code": "item code",
+        "rate": 15000,
+        "qty": 3
+    }]
+  }
+)
+
+```
+ Update Sales Invoice.
+ For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+
+```js
+
+  erpnext.updateSalesInvoiceByName(
+    "Sales Invoice",
+
+    {
+    "due_date": "2017-05-14",
+     "customer": "ram",
+    "items":[{
+        "item_code": "item code",
+        "rate": 15000,
+        "qty": 3
+    }]
+  }
+)
+
+```
+## Purchase Order
+
+Create a Purchase Order.
+For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+
+```js
+
+  erpnext.createPurchaseOrder({
+     "supplier": "ram",
+     "items": [{
+
+             "item_code": "item code",
+             "qty": 4,
+             "price_list_rate": 5000,
+             "schedule_date": "2017-05-31"
+         }
+     ]
+  })
+
+```
+
+ Update Purchase Order.
+ For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+
+ ```js
+
+  erpnext.updatePurchaseOrderByName("name",{
+         "supplier": "ram",
+          "items": [{
+
+                  "item_code": "item code",
+                  "qty": 4,
+                  "price_list_rate": 5000,
+                  "schedule_date": "2017-05-31"
+              }
+          ]
+  })
+
+ ```
