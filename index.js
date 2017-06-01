@@ -646,5 +646,56 @@ ERPNext.prototype.updatePurchaseOrderByName = function(name, object){
 
 
 
+/**
+ *  Will Call REST API to get Purchase Order list.
+ *  @return {Promise} resolve Purchase Order list.
+ */
+
+ERPNext.prototype.getPurchaseOrdersName = function () {
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Purchase Order",
+            jar: _this.cookieJar,
+        }).then(function (purchaseOrders) {
+            purchaseOrders = JSON.parse(purchaseOrders);
+            return purchaseOrders.data;
+        });
+    });
+}
+
+/**
+ *  Will Call REST API to get Purchase Order detail by name.
+ *  @param {String} name name of the Purchase Order.
+ */
+
+ERPNext.prototype.getPurchaseOrderByName = function (name) {
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/Purchase Order/" + name,
+            jar: _this.cookieJar,
+        }).then(function (purchaseOrders) {
+            purchaseOrders = JSON.parse(purchaseOrders);
+            return purchaseOrders.data;
+        })
+    });
+}
+
+
+/**
+ * Get Purchase Order info array
+ * @return {Promise} resolve with array of Purchase Order info
+ */
+
+ERPNext.prototype.getPurchaseOrders = function () {
+    var _this = this;
+    return _this.getPurchaseOrdersName().then(function (PurchaseOrders) {
+        return Promise.map(PurchaseOrders, function (PurchaseOrder) {
+            return _this.getPurchaseOrderByName(PurchaseOrder.name);
+        });
+    })
+}
+
 module.exports = ERPNext;
 

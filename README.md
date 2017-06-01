@@ -387,3 +387,31 @@ For param follow https://frappe.github.io/erpnext/current/models/buying/purchase
   })
 
  ```
+
+ Get All Purchase Order.
+
+ ```js
+
+  erpnext.getPurchaseOrders()
+  .then(function(data){ console.log(data) })
+
+ ```
+
+ Get Info of a Purchase Order by name.
+
+ ```js
+
+  erpnext.getPurchaseOrderByName('PO-00003')
+  .then(function(data){ console.log(data) })
+
+ ```
+
+Get List of purchase orders 
+
+```js
+
+erpnext.getPurchaseOrdersName()
+.then(function(data){ console.log(data) })
+
+```
+
